@@ -2,25 +2,22 @@
 #define LEVEL_H
 
 #include "Question.h"
+#include <vector>
 
 class Level {
-
 private:
-
-    Question questions[10];
-
-    int totalQuestions;
+    std::vector<Question> questions;
+    std::vector<Question> incorrectQuestions;
     int currentQuestion;
 
 public:
-
     Level();
-
     void addQuestion(Question q);
     Question getCurrentQuestion();
     bool hasMoreQuestions() const;
     void nextQuestion();
-
+    void addIncorrectQuestion(Question q);
+    bool hasIncorrectQuestions() const;
+    void retryIncorrect();
 };
-
 #endif
