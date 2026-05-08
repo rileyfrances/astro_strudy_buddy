@@ -9,18 +9,22 @@ Game::Game() {
 void Game::setupQuestions() {
 
     level.addQuestion(Question(
-        "What type of tissue is the epidermis?",
-        "stratified squamous"
+        "A plane that separates the human body  into upper and lower parts is called a",
+        "transverse plane"
     ));
 
     level.addQuestion(Question(
-        "What type of tissue is the dermis?",
-        "connective tissue"
+        "A plane that separates the human body into a front (anterior) and back (posterior) part is called a",
+        "frontal plane"
     ));
 
     level.addQuestion(Question(
         "What part of the brain coordinates voluntary movements, balance, and posture?",
         "cerebellum"
+    ));
+    level.addQuestion(Question(
+        "A plane that separates the human body into right and left parts down the bodys midline is called a:",
+        "Midsagittal plane"
     ));
 
     level.addQuestion(Question(
@@ -66,6 +70,26 @@ void Game::setupQuestions() {
     level.addQuestion(Question(
         "What hormone raises blood sugar and is produced by alpha cells?",
         "glucagon"
+    ));
+    level.addQuestion(Question(
+        "Which of the following macromolecules is broken down by pepsin in the stomach?",
+        "Proteins"
+    ));
+     level.addQuestion(Question(
+        "Which organ is responsible for creating bile?",
+        "Liver"
+    ));
+    level.addQuestion(Question(
+        "What organ releases digestive enzymes into the duodenum?",
+        "Pancreas"
+    ));
+    level.addQuestion(Question(
+        "Which portion of the neuron receives electrical signals from other neurons?",
+        "Dendrites"
+    ));
+    level.addQuestion(Question(
+        "Which of the following ions causes the release of neurotransmitters into the synaptic cleft?",
+        "Calcium ions"
     ));
 }
 
