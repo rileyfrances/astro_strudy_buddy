@@ -26,7 +26,7 @@ void Game::setupLevels() {
 
     level1.addQuestion(Question(
         "What system triggers fight or flight responses?",
-        "sympathetic"
+        "sympathetic nervous system"
     ));
 
 
@@ -74,27 +74,27 @@ void Game::setupLevels() {
 void Game::showLevelStory() {
 
     if (currentLevel == 0) {
-        std::cout << "----LEVEL 1----";
-        std::cout << "Your ship enters deep space.";
-        std::cout << "Answer questions to stabilize navigation.";
+        std::cout << "\n----LEVEL 1----\n";
+        std::cout << "\nYour ship enters deep space.\n";
+        std::cout << "\nAnswer questions to stabilize navigation.\n";
     }
 
     else if (currentLevel == 1) {
-        std::cout << "----LEVEL 2----";
-        std::cout << "A strange alien planet appears.";
-        std::cout << "Use your medical knowledge to survive.";
+        std::cout << "\n----LEVEL 2----\n";
+        std::cout << "\nA strange alien planet appears.\n";
+        std::cout << "\nUse your medical knowledge to survive.\n";
     }
 
     else if (currentLevel == 2) {
-        std::cout << "----FINAL BOSS----";
-        std::cout << "The final system failure begins.";
-        std::cout << "Master all concepts to save humanity.";
+        std::cout << "\n----FINAL BOSS----\n";
+        std::cout << "\nThe final system failure begins.\n";
+        std::cout << "\nMaster all concepts to save humanity.\n";
     }
 }
 
 void Game::run() {
 
-    std::cout << "Welcome to AstroStudy Buddy! ";
+    std::cout << "\nWelcome to AstroStudy Buddy!\n";
 
     while (running && currentLevel < levels.size()) {
         showLevelStory();
