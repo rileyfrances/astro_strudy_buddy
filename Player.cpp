@@ -27,3 +27,10 @@ int Player::getHealth()const {
 int Player::getScore()const{
     return score;
 }
+void Player::increaseAttackPower(int amount) {
+    attackPower += amount;
+}
+
+int Player::getAttackPower() const {
+    return attackPower;
+}

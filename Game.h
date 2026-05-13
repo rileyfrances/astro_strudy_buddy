@@ -3,24 +3,22 @@
 
 #include "Player.h"
 #include "Level.h"
+#include <vector>
 
 class Game {
-
 private:
-
     Player player;
 
-    Level level;
-
+    std::vector<Level> levels;
+    int currentLevel;
     bool running;
-
     void processQuestion();
+    void setupLevels();
+    void showLevelStory();
 
-    void setupQuestions();
 public:
-
     Game();
-
     void run();
 };
+
 #endif

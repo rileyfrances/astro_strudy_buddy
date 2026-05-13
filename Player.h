@@ -11,14 +11,15 @@ private:
     int score;
 
 public:
-
     Player();
 
     void takeDamage(int amount);
     void gainHealth(int amount);
     void addScore(int points);
-    int getHealth () const;
-    int getScore()const;
+    void increaseAttackPower(int amount);
+    int getHealth() const;
+    int getScore() const;
+    int getAttackPower() const;
 };
 
 #endif

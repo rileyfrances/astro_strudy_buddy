@@ -1,150 +1,162 @@
 #include "Game.h"
 #include <iostream>
-#include <string>   
+#include <string>
+
 Game::Game() {
     running = true;
-    setupQuestions();
+    currentLevel = 0;
+
+    setupLevels();
 }
 
-void Game::setupQuestions() {
+void Game::setupLevels() {
 
-    level.addQuestion(Question(
-        "A plane that separates the human body  into upper and lower parts is called a",
-        "transverse plane"
-    ));
 
-    level.addQuestion(Question(
-        "A plane that separates the human body into a front (anterior) and back (posterior) part is called a",
-        "frontal plane"
-    ));
+    Level level1;
 
-    level.addQuestion(Question(
-        "What part of the brain coordinates voluntary movements, balance, and posture?",
+    level1.addQuestion(Question(
+        "What part of the brain coordinates voluntary movements?",
         "cerebellum"
     ));
-    level.addQuestion(Question(
-        "A plane that separates the human body into right and left parts down the bodys midline is called a:",
-        "Midsagittal plane"
-    ));
 
-    level.addQuestion(Question(
-        "What part of the brain handles conscious thought, reasoning, and memory?",
+    level1.addQuestion(Question(
+        "What part of the brain handles memory and reasoning?",
         "cerebrum"
     ));
 
-    level.addQuestion(Question(
-        "What part of the peripheral nervous system controls skeletal muscles?",
-        "somatic system"
-    ));
-
-    level.addQuestion(Question(
-        "What part of the peripheral nervous system controls smooth and cardiac muscle?",
-        "autonomic system"
-    ));
-
-    level.addQuestion(Question(
+    level1.addQuestion(Question(
         "What system triggers fight or flight responses?",
         "sympathetic"
     ));
 
-    level.addQuestion(Question(
-        "What are the receptor cells in olfaction?",
-        "bipolar olfactory neurons"
+
+    Level level2;
+
+    level2.addQuestion(Question(
+        "What hormone lowers blood sugar?",
+        "insulin"
     ));
 
-    level.addQuestion(Question(
-        "What are the receptor cells in gustation?",
-        "taste buds"
+    level2.addQuestion(Question(
+        "What hormone raises blood sugar?",
+        "glucagon"
     ));
 
-    level.addQuestion(Question(
+    level2.addQuestion(Question(
+        "Which organ creates bile?",
+        "liver"
+    ));
+
+
+    Level bossLevel;
+
+    bossLevel.addQuestion(Question(
         "What are the receptor cells in hearing?",
         "hair cells"
     ));
 
-    level.addQuestion(Question(
-        "What hormone lowers blood sugar and is produced by beta cells?",
-        "insulin"
+    bossLevel.addQuestion(Question(
+        "Which portion of the neuron receives signals?",
+        "dendrites"
     ));
 
-    level.addQuestion(Question(
-        "What hormone raises blood sugar and is produced by alpha cells?",
-        "glucagon"
+    bossLevel.addQuestion(Question(
+        "What organ releases digestive enzymes?",
+        "pancreas"
     ));
-    level.addQuestion(Question(
-        "Which of the following macromolecules is broken down by pepsin in the stomach?",
-        "Proteins"
-    ));
-     level.addQuestion(Question(
-        "Which organ is responsible for creating bile?",
-        "Liver"
-    ));
-    level.addQuestion(Question(
-        "What organ releases digestive enzymes into the duodenum?",
-        "Pancreas"
-    ));
-    level.addQuestion(Question(
-        "Which portion of the neuron receives electrical signals from other neurons?",
-        "Dendrites"
-    ));
-    level.addQuestion(Question(
-        "Which of the following ions causes the release of neurotransmitters into the synaptic cleft?",
-        "Calcium ions"
-    ));
+
+
+    levels.push_back(level1);
+    levels.push_back(level2);
+    levels.push_back(bossLevel);
+}
+
+void Game::showLevelStory() {
+
+    if (currentLevel == 0) {
+        std::cout << "----LEVEL 1----";
+        std::cout << "Your ship enters deep space.";
+        std::cout << "Answer questions to stabilize navigation.";
+    }
+
+    else if (currentLevel == 1) {
+        std::cout << "----LEVEL 2----";
+        std::cout << "A strange alien planet appears.";
+        std::cout << "Use your medical knowledge to survive.";
+    }
+
+    else if (currentLevel == 2) {
+        std::cout << "----FINAL BOSS----";
+        std::cout << "The final system failure begins.";
+        std::cout << "Master all concepts to save humanity.";
+    }
 }
 
 void Game::run() {
 
-    std::cout << "Welcome to AstroStudy Buddy!";
+    std::cout << "Welcome to AstroStudy Buddy! ";
 
-    while (running) {
+    while (running && currentLevel < levels.size()) {
+        showLevelStory();
+        Level& level = levels[currentLevel];
 
         while (level.hasMoreQuestions()) {
-
             processQuestion();
-
             if (player.getHealth() <= 0) {
-                std::cout << "You ran out of health!";
+                std::cout << "You lost all health!";
                 running = false;
                 break;
             }
         }
 
-        if (running && level.hasIncorrectQuestions()) {
+        if (!running) {
+            break;
+        }
+        if (level.hasIncorrectQuestions()) {
             std::cout << "Retrying missed questions...";
             level.retryIncorrect();
-        } else {
-            break;  
+        }
+
+        else {
+            std::cout << "LEVEL COMPLETE!";
+            player.addScore(50);
+            player.increaseAttackPower(5);
+            std::cout << "Attack Power Increased!";
+            currentLevel++;
         }
     }
 
-    
+
     if (player.getHealth() > 0) {
-        std::cout << "You mastered all questions! ";
-    } else {
+        std::cout << "You completed AstroStudy Buddy!";
+        std::cout << "Final Score: " << player.getScore() << std::endl;
+    }
+
+    else {
         std::cout << "Game Over.";
     }
 }
 
 void Game::processQuestion() {
-
+    Level& level = levels[currentLevel];
     Question q = level.getCurrentQuestion();
     q.display();
-
     std::string answer;
     std::getline(std::cin >> std::ws, answer);
 
     if (q.checkAnswer(answer)) {
         std::cout << "Correct!";
         player.addScore(10);
-    } else {
-        std::cout << "Wrong! Lose health.";
-        player.takeDamage(10);
-
-        level.addIncorrectQuestion(q);  
     }
 
-    level.nextQuestion();  
+    else {
+        std::cout << "Wrong! Lose health.";
+        player.takeDamage(10);
+        level.addIncorrectQuestion(q);
+    }
 
-    std::cout << "Health: " << player.getHealth() << std::endl;
+    level.nextQuestion();
+
+    std::cout << "Health: "<< player.getHealth()<< std::endl;
+    std::cout << "Score: "<< player.getScore()<< std::endl;
 }
