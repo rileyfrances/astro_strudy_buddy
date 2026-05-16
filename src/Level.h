@@ -19,5 +19,6 @@ public:
     void addIncorrectQuestion(Question q);
     bool hasIncorrectQuestions() const;
     void retryIncorrect();
+    Question getCurrentQuestion() const;
 };
 #endif

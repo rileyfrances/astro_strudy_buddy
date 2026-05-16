@@ -34,3 +34,10 @@ void Player::increaseAttackPower(int amount) {
 int Player::getAttackPower() const {
     return attackPower;
 }
+void Player::resetPlayer() {
+
+}
+
+bool Player::isAlive() const {
+    return true;
+}
