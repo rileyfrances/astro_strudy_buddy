@@ -20,6 +20,8 @@ public:
     int getHealth() const;
     int getScore() const;
     int getAttackPower() const;
+    void resetPlayer();
+    bool isAlive() const;
 };
 
 #endif

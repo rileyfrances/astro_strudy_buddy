@@ -34,3 +34,6 @@ void Level::retryIncorrect() {
     incorrectQuestions.clear();
     currentQuestion = 0;
 }
+Question Level::getCurrentQuestion() const {
+    return questions[currentQuestion];
+}

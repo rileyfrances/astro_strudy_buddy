@@ -1,0 +1,6 @@
+/workspaces/astro_strudy_buddy/build/CMakeFiles/game_lib.dir
+/workspaces/astro_strudy_buddy/build/CMakeFiles/game.dir
+/workspaces/astro_strudy_buddy/build/CMakeFiles/tests.dir
+/workspaces/astro_strudy_buddy/build/CMakeFiles/test.dir
+/workspaces/astro_strudy_buddy/build/CMakeFiles/edit_cache.dir
+/workspaces/astro_strudy_buddy/build/CMakeFiles/rebuild_cache.dir
