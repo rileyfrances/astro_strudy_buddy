@@ -1,2 +1,0 @@
-/usr/bin/ar qc libgame_lib.a CMakeFiles/game_lib.dir/src/Game.cpp.o CMakeFiles/game_lib.dir/src/Level.cpp.o CMakeFiles/game_lib.dir/src/Player.cpp.o CMakeFiles/game_lib.dir/src/Question.cpp.o
-/usr/bin/ranlib libgame_lib.a
