@@ -1,14 +1,16 @@
 # astro_strudy_buddy
 ## Current Status
 
-Implemented Features:
-- question system
-- health system
-- score system
-- multiple levels
+Implemented:
+- Multi level gamep
+- Health and score tracking
+- Retry system for missed questions
+- Hint system for incorrect answers
+- Retry reward system
 
-Stubbed Features:
-- save/load system
+Still Stubbed / Planned:
+- Saving progress between runs
+- Random question selection
 
-Known Issues:
-- input validation is limited
+AI assistance was used for the second feature.
+in ai_collaboration.md
