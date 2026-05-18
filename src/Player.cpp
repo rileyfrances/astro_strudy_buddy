@@ -18,6 +18,10 @@ void Player::gainHealth(int amount){
         health=maxHealth;
     }
 }
+void Player::rewardRetrySuccess() {
+    addScore(20);
+    gainHealth(10);
+}
 void Player::addScore(int points){
     score+=points;
 }

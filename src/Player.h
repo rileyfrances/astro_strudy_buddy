@@ -17,6 +17,7 @@ public:
     void gainHealth(int amount);
     void addScore(int points);
     void increaseAttackPower(int amount);
+    void rewardRetrySuccess();
     int getHealth() const;
     int getScore() const;
     int getAttackPower() const;
