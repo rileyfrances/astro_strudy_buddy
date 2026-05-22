@@ -65,6 +65,26 @@ void test_answer() {
     Question q("Test","brain","Controls thinking");
     assert(q.checkAnswer("brain"));
 }
+
+void test_choices_api_and_check() {
+    std::cout << "Multiple-choice API and check test... ";
+    Question q(
+        "What part of the brain coordinates voluntary movements?",
+        "cerebellum",
+        "Located at the back of the skull"
+    );
+    std::vector<std::string> choices = {"cerebrum", "cerebellum", "brainstem"};
+    q.setChoices(choices);
+    q.setMultipleChoice(true);
+    assert(q.isMultipleChoice());
+    auto got = q.getChoices();
+    assert(got.size() == 3);
+    // check by text
+    assert(q.checkAnswer("cerebellum"));
+    // check by numeric selection (1-based)
+    assert(q.checkAnswer("2"));
+    std::cout << "PASSED\n";
+}
 int main() {
     test_damage();
     test_heal();
@@ -73,6 +93,7 @@ int main() {
     test_empty_hint();
     test_reveal_hints_and_attempts();
     test_reward_retry_health_limit();
+    test_choices_api_and_check();
 
     std::cout << "\nAll tests passed!\n";
 
