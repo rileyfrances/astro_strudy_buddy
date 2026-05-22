@@ -39,43 +39,63 @@ void Game::setupLevels() {
 
     Level level1;
 
-    level1.addQuestion(Question(
+    // Level 1 uses multiple-choice recognition learning
+    {
+        Question q(
+            "What part of the brain coordinates voluntary movements?",
+            "cerebellum",
+            "Located at the back of the skull, beneath the main part of the brain"
+        );
+        std::vector<std::string> choices = {"cerebrum", "cerebellum", "brainstem", "hippocampus"};
+        q.setChoices(choices);
+        q.setMultipleChoice(true);
+        level1.addQuestion(q);
+    }
+
+    {
+        Question q(
+            "What part of the brain handles memory and reasoning?",
+            "cerebrum",
+            "The largest part of the brain"
+        );
+        std::vector<std::string> choices = {"cerebellum", "cerebrum", "amygdala", "medulla"};
+        q.setChoices(choices);
+        q.setMultipleChoice(true);
+        level1.addQuestion(q);
+    }
+
+    {
+        Question q(
+            "What system triggers fight or flight responses?",
+            "sympathetic nervous system",
+            "Controls involuntary, automatic bodily functions"
+        );
+        std::vector<std::string> choices = {"parasympathetic nervous system", "sympathetic nervous system", "central nervous system", "enteric nervous system"};
+        q.setChoices(choices);
+        q.setMultipleChoice(true);
+        level1.addQuestion(q);
+    }
+
+
+    Level level2;
+
+    // Same questions as level 1, but typed-answer only for mastery recall
+    level2.addQuestion(Question(
         "What part of the brain coordinates voluntary movements?",
         "cerebellum",
         "Located at the back of the skull, beneath the main part of the brain"
     ));
 
-    level1.addQuestion(Question(
+    level2.addQuestion(Question(
         "What part of the brain handles memory and reasoning?",
         "cerebrum",
         "The largest part of the brain"
     ));
 
-    level1.addQuestion(Question(
+    level2.addQuestion(Question(
         "What system triggers fight or flight responses?",
         "sympathetic nervous system",
         "Controls involuntary, automatic bodily functions"
-    ));
-
-
-    Level level2;
-
-    level2.addQuestion(Question(
-        "What hormone lowers blood sugar?",
-        "insulin",
-        "Produced by Pancreas"
-    ));
-
-    level2.addQuestion(Question(
-        "What hormone raises blood sugar?",
-        "glucagon",
-        "Produced by Pancreas"
-    ));
-
-    level2.addQuestion(Question(
-        "Which organ creates bile?",
-        "liver",
-        "The body's largest internal organ"
     ));
 
 
@@ -184,7 +204,18 @@ void Game::processQuestion() {
 
     std::cout << std::endl;
     q.display();
-    std::cout << std::endl;
+    if (q.isMultipleChoice()) {
+        std::cout << std::endl;
+        auto choices = q.getChoices();
+        for (int i = 0; i < (int)choices.size(); ++i) {
+            std::cout << i + 1 << ". " << choices[i] << std::endl;
+        }
+        std::cout << std::endl;
+        std::cout << "Enter the choice number or type the answer: ";
+    } else {
+        std::cout << std::endl;
+        std::cout << "Enter your answer: ";
+    }
 
     bool inRetry = (q.getAttempts() > 0) || q.wasPreviouslyMissed();
     if (inRetry) {

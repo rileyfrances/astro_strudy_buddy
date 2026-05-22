@@ -20,4 +20,8 @@ I want this feature includes:Question,Level,Game, and Player. "
 ## What I'd do differently next time
 - I would approach the AI with a clearer idea of how I want to implement a feature not just what I want to implement.
 
+## Fresh-conversation review
+- I started a conversation and requested a PR tyle review.
+- I accepted some suggestions about improving output formatting and simplifying repeated code, but I rejected major refractors/suggestions that added unnecessary complexity.
+- I kept the final implementation simple so it matched the style used in this the course.
 

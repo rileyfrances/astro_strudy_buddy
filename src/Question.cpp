@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <cctype>
 
 std::string toLower(std::string str) {
     std::transform(str.begin(), str.end(), str.begin(), ::tolower);
@@ -35,6 +36,26 @@ bool Question::checkAnswer(std::string userAnswer) const {
     std::string user = toLower(userAnswer);
     std::string correct = toLower(correctAnswer);
 
+    if (multipleChoice) {
+        // If user entered a numeric choice like "1", allow 1-based index selection
+        bool allDigits = !user.empty() && std::all_of(user.begin(), user.end(), ::isdigit);
+        if (allDigits && !choices.empty()) {
+            int idx = std::stoi(user) - 1;
+            if (idx >= 0 && idx < (int)choices.size()) {
+                return toLower(choices[idx]) == correct;
+            }
+        }
+
+        // Otherwise, match exact choice text or the canonical correctAnswer
+        for (const auto &ch : choices) {
+            if (toLower(ch) == user) return toLower(correctAnswer) == toLower(ch);
+        }
+
+        if (user == correct) return true;
+
+        return false;
+    }
+
     if (user == correct) {
         return true;
     }
@@ -44,6 +65,22 @@ bool Question::checkAnswer(std::string userAnswer) const {
     }
 
     return false;
+}
+
+std::vector<std::string> Question::getChoices() const {
+    return choices;
+}
+
+void Question::setChoices(const std::vector<std::string>& c) {
+    choices = c;
+}
+
+bool Question::isMultipleChoice() const {
+    return multipleChoice;
+}
+
+void Question::setMultipleChoice(bool val) {
+    multipleChoice = val;
 }
 
 std::string Question::getHint() const {
